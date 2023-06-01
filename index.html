@@ -7,6 +7,17 @@
   <title>Todo With Store</title>
 </head>
 <body>
+  <div class="container mt-5 w-50">
+    <input
+      class="form-control mb-5"
+      type="text"
+      name="todo-item-content"
+      id="todo-item-content"
+      onkeyup="event.key === 'Enter' && addNewTodoItem(event)"
+      placeholder="Add TODO item"
+    />
+    <ul id="todo-container" class="container"></ul>
+  </div>
   <script src="./index.js"></script>
 </body>
 </html>
