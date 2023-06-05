@@ -1,6 +1,6 @@
 const todoContainer = document.querySelector('#todo-container');
 
-const store = [];
+var store = [];
 
 function createTodoElement({text}) {
   if (!text) return;
@@ -30,7 +30,17 @@ function addNewItem(text) {
   store.push({
     id: Date.now(),
     text
-  })
+  });
+  storeState();
+}
+
+function storeState() {
+  localStorage.setItem('todoWithStore', JSON.stringify(store));
+}
+
+function restoreState() {
+  store = JSON.parse(localStorage.getItem('todoWithStore'));
+  renderItems();
 }
 
 function addNewTodoItem(event) {
@@ -39,3 +49,5 @@ function addNewTodoItem(event) {
   addNewItem(text);
   renderItems();
 }
+
+restoreState();
