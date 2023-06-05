@@ -2,12 +2,13 @@ const todoContainer = document.querySelector('#todo-container');
 
 var store = [];
 
-function createTodoElement({text}) {
+function createTodoElement({text, id}) {
   if (!text) return;
   const todoItemWrapper = document.createElement('li');
   const todoRemoveBtn = document.createElement('button');
   const todoTextEle = document.createElement('p');
   todoRemoveBtn.innerText = 'X';
+  todoRemoveBtn.addEventListener('click', () => removeItem(id));
   todoRemoveBtn.classList.add('btn','btn-outline-danger', 'btn-md', 'col-1');
   todoItemWrapper.classList.add('row', 'py-3', 'border-top', 'border-bottom', 'border-light-subtle');
   todoTextEle.classList.add('col-11', 'm-0');
@@ -36,11 +37,17 @@ function addNewItem(text) {
 
 function storeState() {
   localStorage.setItem('todoWithStore', JSON.stringify(store));
+  renderItems();
 }
 
 function restoreState() {
   store = JSON.parse(localStorage.getItem('todoWithStore'));
   renderItems();
+}
+
+function removeItem (itemId) {
+  store = store.filter(({id}) => id !== itemId );
+  storeState();
 }
 
 function addNewTodoItem(event) {
