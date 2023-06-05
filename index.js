@@ -1,6 +1,8 @@
 const todoContainer = document.querySelector('#todo-container');
 
-function createTodoElement(text) {
+const store = [];
+
+function createTodoElement({text}) {
   if (!text) return;
   const todoItemWrapper = document.createElement('li');
   const todoRemoveBtn = document.createElement('button');
@@ -15,9 +17,25 @@ function createTodoElement(text) {
   return todoItemWrapper
 }
 
+function renderItems() {
+  todoContainer.innerHTML = '';
+  store.forEach(item => {
+    const newItem = createTodoElement(item);
+    todoContainer.append(newItem);
+  });
+  console.log(store);
+};
+
+function addNewItem(text) {
+  store.push({
+    id: Date.now(),
+    text
+  })
+}
+
 function addNewTodoItem(event) {
   const text = event.target.value;
   event.target.value = null;
-  const newItem = createTodoElement(text);
-  todoContainer.append(newItem);
+  addNewItem(text);
+  renderItems();
 }
