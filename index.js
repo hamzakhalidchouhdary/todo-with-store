@@ -41,7 +41,7 @@ function storeState() {
 }
 
 function restoreState() {
-  store = JSON.parse(localStorage.getItem('todoWithStore'));
+  store = JSON.parse(localStorage.getItem('todoWithStore')) || [];
   renderItems();
 }
 
