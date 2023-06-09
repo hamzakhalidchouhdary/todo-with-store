@@ -24,7 +24,6 @@ function renderItems() {
     const newItem = createTodoElement(item);
     todoContainer.append(newItem);
   });
-  console.log(store);
 };
 
 function addNewItem(text) {
